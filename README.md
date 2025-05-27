@@ -1,54 +1,59 @@
-# React + TypeScript + Vite
+# SimpleStore
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive e-commerce demo built with React, TypeScript, and Vite. Fetches product and user data from [fakestoreapi.com](https://fakestoreapi.com/).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Responsive design
+- Dark mode support
+- Working navigation menu
+- Spinner and skeleton loaders
+- Fetches data from external API
+- Clean, accessible UI
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Radix UI](https://www.radix-ui.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [tw-animate](https://github.com/steven-tey/tw-animate)
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge)
+- [lucide-react](https://lucide.dev/)
+- [motion](https://motion.dev/)
+- [axios](https://axios-http.com/)
+- [react-router-dom](https://reactrouter.com/)
+- [react-use](https://github.com/streamich/react-use)
+- [eslint](https://eslint.org/)
+- [21st.dev](https://21st.dev/)
+- [Vercel](https://vercel.com/) (deployment)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Pages
+
+- `/` — Home
+- `/products` — Product list
+- `/products/:id` — Product details
+- `/users` — User list
+- `/users/:id` — User details
+- `*` — 404 Not Found
+
+## Getting Started
+
+1. Clone the repo
+2. Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. Start the dev server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+## License
+
+[MIT](./LICENSE)
