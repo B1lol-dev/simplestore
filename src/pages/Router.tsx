@@ -2,6 +2,10 @@ import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Suspense } from "@/utils/Suspense";
 import { Toaster } from "react-hot-toast";
+import Product from "./Products/Product";
+import Products from "./Products/Products";
+import { Users } from "lucide-react";
+import User from "./Users/User";
 
 // pages
 const Layout = lazy(() => import("@/components/layouts/RootLayout"));
@@ -26,6 +30,41 @@ const Router = () => {
             element={
               <Suspense>
                 <Home />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/products"
+            element={
+              <Suspense>
+                <Products />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/products/:id"
+            element={
+              <Suspense>
+                <Product />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <Suspense>
+                <Users />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/users/:id"
+            element={
+              <Suspense>
+                <User />
               </Suspense>
             }
           />
