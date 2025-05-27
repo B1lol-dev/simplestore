@@ -1,4 +1,3 @@
-import React from "react";
 import { Loader } from "../ui/loader";
 
 const LoaderFull = () => {
@@ -9,4 +8,4 @@ const LoaderFull = () => {
   );
 };
 
-export default React.memo(LoaderFull);
+export default LoaderFull;
