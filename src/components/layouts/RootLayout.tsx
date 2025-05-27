@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 
 // hooks
 import { useNetworkState } from "react-use";
+import { Navbar } from "../ui/navbar";
 
 const RootLayout = () => {
   const networkState = useNetworkState();
@@ -17,6 +18,7 @@ const RootLayout = () => {
   return (
     <>
       <main>
+        <Navbar />
         <Outlet />
       </main>
     </>
