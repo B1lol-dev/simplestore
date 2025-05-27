@@ -1,16 +1,16 @@
 import React, { lazy } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Suspense } from "@/utils/Suspense";
 import { Toaster } from "react-hot-toast";
-import Product from "./Products/Product";
-import Products from "./Products/Products";
-import { Users } from "lucide-react";
-import User from "./Users/User";
 
 // pages
 const Layout = lazy(() => import("@/components/layouts/RootLayout"));
 const Home = lazy(() => import("./Home/Home"));
 const NotFound = lazy(() => import("./NotFound/NotFound"));
+const Products = lazy(() => import("./Products/Products"));
+const Product = lazy(() => import("./Products/Product"));
+const Users = lazy(() => import("./Users/Users"));
+const User = lazy(() => import("./Users/User"));
 
 const Router = () => {
   return (
@@ -33,6 +33,8 @@ const Router = () => {
               </Suspense>
             }
           />
+
+          <Route path="/home" element={<Navigate to="/" />} />
 
           <Route
             path="/products"
