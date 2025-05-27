@@ -66,7 +66,7 @@ export const Navbar = () => {
           onClick={toggleMenu}
           whileTap={{ scale: 0.9 }}
         >
-          <Menu className="h-6 w-6 text-gray-900" />
+          <Menu className="h-6 w-6 text-gray-900 dark:text-white" />
         </motion.button>
       </div>
 
@@ -74,7 +74,7 @@ export const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-50 pt-24 px-6 md:hidden"
+            className="fixed inset-0 bg-card z-50 pt-24 px-6 md:hidden"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -88,10 +88,10 @@ export const Navbar = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <X className="h-6 w-6 text-gray-900" />
+              <X className="h-6 w-6 text-gray-900 dark:text-white" />
             </motion.button>
             <div className="flex flex-col space-y-6">
-              {["Home", "Pricing", "Docs", "Projects"].map((item, i) => (
+              {["Home", "Products", "Users"].map((item, i) => (
                 <motion.div
                   key={item}
                   initial={{ opacity: 0, x: 20 }}
@@ -99,13 +99,13 @@ export const Navbar = () => {
                   transition={{ delay: i * 0.1 + 0.1 }}
                   exit={{ opacity: 0, x: 20 }}
                 >
-                  <a
-                    href="#"
-                    className="text-base text-gray-900 font-medium"
+                  <Link
+                    to={"/" + item.toLowerCase()}
+                    className="text-base text-gray-900 font-medium dark:text-white"
                     onClick={toggleMenu}
                   >
                     {item}
-                  </a>
+                  </Link>
                 </motion.div>
               ))}
 
@@ -116,13 +116,9 @@ export const Navbar = () => {
                 exit={{ opacity: 0, y: 20 }}
                 className="pt-6"
               >
-                <a
-                  href="#"
-                  className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-white bg-black rounded-full hover:bg-gray-800 transition-colors "
-                  onClick={toggleMenu}
-                >
-                  Get Started
-                </a>
+                <Button className="w-full" onClick={toggleTheme}>
+                  {theme == "dark" ? <Sun /> : <Moon />}
+                </Button>
               </motion.div>
             </div>
           </motion.div>
