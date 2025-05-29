@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Suspense } from "@/utils/Suspense";
 import { Toaster } from "react-hot-toast";
@@ -11,6 +11,7 @@ const Products = lazy(() => import("./Products/Products"));
 const Product = lazy(() => import("./Products/Product"));
 const Users = lazy(() => import("./Users/Users"));
 const User = lazy(() => import("./Users/User"));
+const Whishlist = lazy(() => import("./Whishlist/Whishlist"));
 
 const Router = () => {
   return (
@@ -67,6 +68,15 @@ const Router = () => {
             element={
               <Suspense>
                 <User />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/whishlist"
+            element={
+              <Suspense>
+                <Whishlist />
               </Suspense>
             }
           />

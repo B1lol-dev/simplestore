@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, Moon, Store, Sun, X } from "lucide-react";
+import { Heart, Menu, Moon, Store, Sun, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { Button } from "./button";
@@ -53,9 +53,13 @@ export const Navbar = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
-          whileHover={{ scale: 1.05 }}
         >
-          <Button onClick={toggleTheme}>
+          <Link to="/whishlist">
+            <Button>
+              <Heart />
+            </Button>
+          </Link>
+          <Button className="ml-2" onClick={toggleTheme}>
             {theme == "dark" ? <Sun /> : <Moon />}
           </Button>
         </motion.div>

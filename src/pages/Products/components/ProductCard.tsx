@@ -7,15 +7,37 @@ import {
 } from "@/components/ui/card";
 import type { IProduct } from "@/types/api";
 import { Badge } from "@/components/ui/badge";
-import { Star } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useWhishlist } from "@/context/WhishlistContext";
+import { memo } from "react";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
+  const [state, dispatch] = useWhishlist();
+
+  const isInWhishlist = state.whishlist.find(
+    (item: { id: number }) => item.id === product.id
+  );
+
   return (
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader className="p-0">
-        <div className="aspect-square overflow-hidden">
+        <div className="aspect-square overflow-hidden relative bg-white mx-5 rounded-md">
+          <div className="absolute right-3 top-3">
+            <Button
+              className="rounded-full size-10"
+              onClick={() =>
+                dispatch({ type: "TOGGLE_WHISHLIST", payload: product })
+              }
+            >
+              <Heart
+                size={256}
+                fill={isInWhishlist ? "black" : "none"}
+                color={isInWhishlist ? "black" : "black"}
+              />
+            </Button>
+          </div>
           <img
             src={product.image || "/placeholder.svg"}
             alt={product.title}
@@ -49,4 +71,4 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);
