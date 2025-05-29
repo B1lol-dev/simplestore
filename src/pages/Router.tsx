@@ -13,6 +13,7 @@ const Users = lazy(() => import("./Users/Users"));
 const User = lazy(() => import("./Users/User"));
 const Whishlist = lazy(() => import("./Whishlist/Whishlist"));
 const Cart = lazy(() => import("./Cart/Cart"));
+const Chat = lazy(() => import("./Chat/Chat"));
 
 const Router = () => {
   return (
@@ -87,6 +88,15 @@ const Router = () => {
             element={
               <Suspense>
                 <Cart />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/chat/:id"
+            element={
+              <Suspense>
+                <Chat />
               </Suspense>
             }
           />

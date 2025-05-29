@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useFetch } from "@/hooks/useFetch";
 import type { IUser } from "@/types/api";
 import { ArrowLeft, Globe, Phone } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const User = () => {
   const params = useParams();
@@ -133,6 +133,11 @@ const User = () => {
                         Lat: {user.address.geolocation.lat}, Long:{" "}
                         {user.address.geolocation.long}
                       </p>
+                    </div>
+                    <div className="space-y-2">
+                      <Link to={"/chat/" + user.id}>
+                        <Button>Send Message</Button>
+                      </Link>
                     </div>
                   </CardContent>
                 </div>
