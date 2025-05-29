@@ -10,6 +10,10 @@ A modern, responsive e-commerce demo built with React, TypeScript, and Vite. Fet
 - Spinner and skeleton loaders
 - Fetches data from external API
 - Clean, accessible UI
+- Cart functionality
+- Wishlist functionality
+- AI integration (powered by io.net and OpenAI)
+- Chat with AI
 
 ## Tech Stack
 
@@ -29,6 +33,9 @@ A modern, responsive e-commerce demo built with React, TypeScript, and Vite. Fet
 - [eslint](https://eslint.org/)
 - [21st.dev](https://21st.dev/)
 - [Vercel](https://vercel.com/) (deployment)
+- [uuid](https://github.com/uuidjs/uuid)
+- [io.net (AI)](https://io.net/)
+- [OpenAI](https://openai.com/)
 
 ## Pages
 
@@ -37,6 +44,9 @@ A modern, responsive e-commerce demo built with React, TypeScript, and Vite. Fet
 - `/products/:id` — Product details
 - `/users` — User list
 - `/users/:id` — User details
+- `/wishlist` — Wishlist
+- `/cart` — Cart
+- `/chat/:userId` — Chat with AI
 - `*` — 404 Not Found
 
 ## Getting Started
