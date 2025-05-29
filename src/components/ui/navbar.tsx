@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Heart, Menu, Moon, Store, Sun, X } from "lucide-react";
+import { Heart, Menu, Moon, ShoppingCart, Store, Sun, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { Button } from "./button";
@@ -57,6 +57,11 @@ export const Navbar = () => {
           <Link to="/whishlist">
             <Button>
               <Heart />
+            </Button>
+          </Link>
+          <Link to="/cart" className="ml-2">
+            <Button>
+              <ShoppingCart />
             </Button>
           </Link>
           <Button className="ml-2" onClick={toggleTheme}>

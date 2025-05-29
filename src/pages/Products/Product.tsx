@@ -4,14 +4,17 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useFetch } from "@/hooks/useFetch";
 import type { IProduct } from "@/types/api";
-import { ArrowLeft, ShoppingCart, Star } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import Container from "@/components/helpers/Container";
-import toast from "react-hot-toast";
+import { useCart } from "@/context/CartContext";
+// import { useWhishlist } from "@/context/WhishlistContext";
 
 const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [cartState, dispatchCart] = useCart();
+  // const [whishlistState, dispatchWhishlist] = useWhishlist();
 
   const {
     data: product,
@@ -20,8 +23,16 @@ const Product = () => {
   } = useFetch<IProduct>(`/products/${id}`);
 
   const handleAddCard = () => {
-    toast.success(`Product ${product?.title} added to card`);
+    dispatchCart({ type: "ADD_TO_CART", payload: { ...product, count: 1 } });
   };
+
+  // const isInWhishlist = whishlistState.whishlist.find(
+  //   (item: { id: number }) => item.id === product?.id
+  // );
+
+  const isInCart = cartState.cart.find(
+    (item: { id: number }) => item.id === product?.id
+  );
 
   if (loading) {
     return (
@@ -121,10 +132,48 @@ const Product = () => {
                 </CardContent>
               </Card>
 
-              <Button size="lg" className="w-full" onClick={handleAddCard}>
-                <ShoppingCart className="mr-2 h-5 w-5" />
-                Add to Cart
-              </Button>
+              {!isInCart ? (
+                <Button size="lg" className="w-full" onClick={handleAddCard}>
+                  <ShoppingCart className="mr-2 h-5 w-5" />
+                  Add to Cart
+                </Button>
+              ) : (
+                <div className="flex items-center gap-10">
+                  <Button
+                    size="lg"
+                    onClick={() => {
+                      if (isInCart.count > 1) {
+                        dispatchCart({
+                          type: "UPDATE_CART_ITEM",
+                          payload: {
+                            ...product,
+                            count: isInCart.count - 1,
+                          },
+                        });
+                      } else {
+                        dispatchCart({
+                          type: "DELETE_FROM_CART",
+                          payload: { ...product },
+                        });
+                      }
+                    }}
+                  >
+                    <Minus />
+                  </Button>
+                  <h1 className="text-xl">{isInCart.count}</h1>
+                  <Button
+                    size="lg"
+                    onClick={() =>
+                      dispatchCart({
+                        type: "UPDATE_CART_ITEM",
+                        payload: { ...product, count: isInCart.count + 1 },
+                      })
+                    }
+                  >
+                    <Plus />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>

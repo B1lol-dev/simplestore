@@ -7,7 +7,6 @@ import ProductCard from "./components/ProductCard";
 
 const Products = () => {
   const { data: products, loading, error } = useFetch<IProduct[]>("/products");
-  console.log("rendered");
 
   if (loading) {
     return <ProductsSkeleton />;

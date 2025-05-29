@@ -7,16 +7,22 @@ import {
 } from "@/components/ui/card";
 import type { IProduct } from "@/types/api";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star } from "lucide-react";
+import { Check, Heart, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useWhishlist } from "@/context/WhishlistContext";
 import { memo } from "react";
+import { useCart } from "@/context/CartContext";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
-  const [state, dispatch] = useWhishlist();
+  const [whishlistState, dispatchWhishlist] = useWhishlist();
+  const [cartState, dispatchCart] = useCart();
 
-  const isInWhishlist = state.whishlist.find(
+  const isInWhishlist = whishlistState.whishlist.find(
+    (item: { id: number }) => item.id === product.id
+  );
+
+  const isInCart = cartState.cart.find(
     (item: { id: number }) => item.id === product.id
   );
 
@@ -24,18 +30,28 @@ const ProductCard = ({ product }: { product: IProduct }) => {
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader className="p-0">
         <div className="aspect-square overflow-hidden relative bg-white mx-5 rounded-md">
-          <div className="absolute right-3 top-3">
+          <div className="absolute right-3 top-3 flex flex-col gap-3">
             <Button
               className="rounded-full size-10"
               onClick={() =>
-                dispatch({ type: "TOGGLE_WHISHLIST", payload: product })
+                dispatchWhishlist({
+                  type: "TOGGLE_WHISHLIST",
+                  payload: product,
+                })
               }
             >
-              <Heart
-                size={256}
-                fill={isInWhishlist ? "black" : "none"}
-                color={isInWhishlist ? "black" : "black"}
-              />
+              <Heart size={256} fill={isInWhishlist ? "black" : "none"} />
+            </Button>
+            <Button
+              className="rounded-full size-10"
+              onClick={() =>
+                dispatchCart({
+                  type: "TOGGLE_CART",
+                  payload: product,
+                })
+              }
+            >
+              {!isInCart ? <ShoppingCart size={256} /> : <Check />}
             </Button>
           </div>
           <img
@@ -56,7 +72,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           <div className="flex items-center gap-1">
             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
             <span className="text-sm text-muted-foreground">
-              {product.rating.rate} ({product.rating.count})
+              {product?.rating?.rate} ({product?.rating?.count})
             </span>
           </div>
           <p className="text-lg font-bold">${product.price}</p>

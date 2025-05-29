@@ -1,3 +1,4 @@
+import type { IProduct } from "@/types/api";
 import { createContext, useContext, useReducer, type ReactNode } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components, @typescript-eslint/no-explicit-any
@@ -17,20 +18,28 @@ const reducer = (state: any, action: { type: string; payload: any }) => {
     case "DELETE_FROM_CART":
       return {
         ...state,
-        cart: Array(state.cart).filter((item) => item.id !== payload),
+        cart: state.cart.filter((item: IProduct) => item.id !== payload),
       };
-      return state.whishlist.find(
-        (item: { id: number }) => item.id === payload.id
-      )
+    case "CLEAR_CART":
+      return { ...state, cart: [] };
+    case "UPDATE_CART_ITEM":
+      return {
+        ...state,
+        cart: state.cart.map((item: IProduct) =>
+          item.id === payload.id ? { ...item, ...payload } : item
+        ),
+      };
+    case "TOGGLE_CART":
+      return state.cart.find((item: { id: number }) => item.id === payload.id)
         ? {
             ...state,
-            whishlist: state.whishlist.filter(
+            cart: state.cart.filter(
               (item: { id: number }) => item.id !== payload.id
             ),
           }
         : {
             ...state,
-            whishlist: [...state.whishlist, payload],
+            cart: [...state.cart, payload],
           };
     default:
       return state;
