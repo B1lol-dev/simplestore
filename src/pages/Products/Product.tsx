@@ -86,7 +86,7 @@ const Product = () => {
           </Button>
 
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="aspect-square overflow-hidden rounded-lg">
+            <div className="aspect-square overflow-hidden rounded-lg h-[700px] bg-white">
               <img
                 src={product.image || "/placeholder.svg"}
                 alt={product.title}
