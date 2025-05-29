@@ -1,14 +1,14 @@
 import { BrowserRouter } from "react-router-dom";
 import Router from "./pages/Router";
-import { WhishlistContextProvider } from "./context/WhishlistContext";
+import { AppProvider } from "./context";
 
 function App() {
   return (
-    <WhishlistContextProvider>
+    <AppProvider>
       <BrowserRouter>
         <Router />
       </BrowserRouter>
-    </WhishlistContextProvider>
+    </AppProvider>
   );
 }
 
